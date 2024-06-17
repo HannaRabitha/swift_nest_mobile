@@ -3,6 +3,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:swift_nest/about.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:swift_nest/option_camera.dart';
 // import 'package:swift_nest/screen/splash_screen.dart';
 
 void main() async {
@@ -113,16 +114,28 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 20),
             ElevatedButton(
               style: style,
-              onPressed: _incrementCounter,
-              child: const Text('Function Btn'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const OptionCameraPage()),
+                );
+              },
+              child: const Text('Mulai Klasifikasi'),
             ),
-            const Text(
-              'Check number test:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+
+            // ElevatedButton(
+            //   style: style,
+            //   onPressed: _incrementCounter,
+            //   child: const Text('Function Btn'),
+            // ),
+            // const Text(
+            //   'Check number test:',
+            // ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
