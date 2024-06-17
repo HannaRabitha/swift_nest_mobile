@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:swift_nest/result.dart';
 
 class OptionCameraPage extends StatefulWidget {
   const OptionCameraPage({super.key});
@@ -33,7 +34,7 @@ class _OptionCameraPage extends State<OptionCameraPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint('Camera');
+                  _openCamera();
                 },
                 child: const Text('Open Camera'),
               ),
@@ -67,5 +68,36 @@ class _OptionCameraPage extends State<OptionCameraPage> {
         returnedImage!.path,
       );
     });
+
+    _navigateToResultPage();
+  }
+
+  Future _openCamera() async {
+    // ignore: deprecated_member_use
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+
+    if (returnedImage == null) {
+      return;
+    }
+
+    setState(() {
+      _selectedImage = File(
+        returnedImage!.path,
+      );
+    });
+
+    _navigateToResultPage();
+  }
+
+  void _navigateToResultPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultPage(
+          imageFile: _selectedImage!,
+        ),
+      ),
+    );
   }
 }
