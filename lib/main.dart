@@ -101,6 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 40),
             const SizedBox(
+                width: 60,
+                child: Image(
+                  image: AssetImage('assets/images/splash-color.png'),
+                )),
+
+            const SizedBox(
                 width: double.infinity,
                 child: Image(
                   image: AssetImage('assets/images/drawkit1.png'),
@@ -142,11 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 40),
-            // const SizedBox(
-            //     width: 60,
-            //     child: Image(
-            //       image: AssetImage('assets/images/drawkit-clock.png'),
-            //     )),
+
             SizedBox(height: 40),
             SizedBox(
               //full width
