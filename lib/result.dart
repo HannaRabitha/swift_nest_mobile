@@ -2,10 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:swift_nest/option_camera.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key, required this.imageFile});
+  const ResultPage(
+      {super.key, required this.imageFile, required this.prediction});
   final File imageFile;
+  final String prediction;
 
   @override
   State<ResultPage> createState() => _ResultPage();
@@ -36,7 +39,7 @@ class _ResultPage extends State<ResultPage> {
               children: <Widget>[
                 Center(
                   child: Text(
-                    'Welcome!',
+                    'Classification',
                     style: TextStyle(
                       color: HexColor('#071330'),
                       fontSize: 40,
@@ -44,6 +47,17 @@ class _ResultPage extends State<ResultPage> {
                     ),
                   ),
                 ),
+                Center(
+                  child: Text(
+                    widget.prediction,
+                    style: TextStyle(
+                      color: HexColor('#028476'),
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
                 Positioned(
                     left: 50,
                     right: 50,
@@ -55,15 +69,18 @@ class _ResultPage extends State<ResultPage> {
                       height: 200,
                       fit: BoxFit.cover,
                     )),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 ElevatedButton(
                   style: style,
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const OptionCameraPage()));
                   },
                   child: const Text('New Image'),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
