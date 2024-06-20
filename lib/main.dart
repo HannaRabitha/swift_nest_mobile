@@ -58,8 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    final ButtonStyle style = ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500));
+
+    final ButtonStyle style2 = ElevatedButton.styleFrom(
+      backgroundColor: Colors.teal.shade900,
+      foregroundColor: Colors.white,
+      //border radius
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+    );
 
     return Scaffold(
         // appBar: AppBar(
@@ -67,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //   title: Text(widget.title),
         // ),
         body: Container(
+      padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
           // gradient: LinearGradient(
           //     begin: Alignment.topRight,
@@ -83,46 +93,94 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 'Welcome!',
                 style: TextStyle(
-                  color: HexColor('#071330'),
-                  fontSize: 40,
+                  color: Colors.teal.shade900,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            Positioned(
-                left: 50,
-                right: 50,
-                top: 0,
-                bottom: 50,
-                child: SvgPicture.asset(
-                  'assets/images/nature.svg',
-                  semanticsLabel: 'Swift Nest Logo',
-                  width: 300,
-                  height: 300,
+            const SizedBox(height: 40),
+            const SizedBox(
+                width: double.infinity,
+                child: Image(
+                  image: AssetImage('assets/images/drawkit1.png'),
                 )),
+            // Positioned(
+            //     left: 50,
+            //     right: 50,
+            //     top: 0,
+            //     bottom: 50,
+            //     child: SvgPicture.asset(
+            //       'assets/images/nature.svg',
+            //       semanticsLabel: 'Swift Nest Logo',
+            //       width: 300,
+            //       height: 300,
+            //     )),
+            const SizedBox(height: 20),
+            Center(
+              child: Text(
+                'Klasifikasi Bentuk \n Sarang Burung Walet',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HexColor('#071330'),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+
+            Center(
+              child: Text(
+                'menggunakan Efficientnet',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HexColor('#BDBDBD'),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             SizedBox(height: 40),
-            ElevatedButton(
-              style: style,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutPage()),
-                );
-              },
-              child: const Text('About'),
+            // const SizedBox(
+            //     width: 60,
+            //     child: Image(
+            //       image: AssetImage('assets/images/drawkit-clock.png'),
+            //     )),
+            SizedBox(height: 40),
+            SizedBox(
+              //full width
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: style2,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AboutPage()),
+                  );
+                },
+                child: const Text('Tentang Walet'),
+              ),
             ),
+
             SizedBox(height: 20),
-            ElevatedButton(
-              style: style,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const OptionCameraPage()),
-                );
-              },
-              child: const Text('Mulai Klasifikasi'),
-            ),
+            SizedBox(
+              //full width
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: style,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OptionCameraPage()),
+                  );
+                },
+                child: const Text('Mulai Klasifikasi'),
+              ),
+            )
 
             // ElevatedButton(
             //   style: style,
