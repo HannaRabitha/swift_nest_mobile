@@ -78,7 +78,7 @@ class _ResultPage extends State<ResultPage> {
                         MaterialPageRoute(
                             builder: (context) => const OptionCameraPage()));
                   },
-                  child: const Text('New Image'),
+                  child: const Text('Back to Camera'),
                 ),
                 const SizedBox(height: 20),
               ],

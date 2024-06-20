@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AboutPage()),
+                    MaterialPageRoute(builder: (context) => AboutPage()),
                   );
                 },
                 child: const Text('Tentang Walet'),

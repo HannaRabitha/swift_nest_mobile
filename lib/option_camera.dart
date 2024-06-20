@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class OptionCameraPage extends StatefulWidget {
   const OptionCameraPage({super.key});
@@ -30,20 +31,48 @@ class _OptionCameraPage extends State<OptionCameraPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              const SizedBox(
+                  width: 200,
+                  child: Image(
+                    image: AssetImage('assets/images/drawkit-circle.png'),
+                  )),
+              const SizedBox(height: 40),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal.shade900),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w500)),
+                ),
                 onPressed: () {
                   _pickImagefromGallery();
                 },
-                child: const Text('Image from Gallery'),
+                child: const Text('Image from Gallery',
+                    style: TextStyle(fontSize: 20)),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   _openCamera();
                 },
-                child: const Text('Open Camera'),
+                child:
+                    const Text('Open Camera', style: TextStyle(fontSize: 20)),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
+              Center(
+                child: Text(
+                  'Select a Picture',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: HexColor('#BDBDBD'),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
               // _selectedImage == null
               //     ? const Text('No image selected.')
               //     : Image.file(

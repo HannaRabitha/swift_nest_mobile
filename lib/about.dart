@@ -1,33 +1,82 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+class DataWalet {
+  final String title;
+  final String image;
+  final String description;
+
+  DataWalet({
+    required this.title,
+    required this.image,
+    required this.description,
+  });
+
+  factory DataWalet.fromJson(Map<String, dynamic> json) {
+    return DataWalet(
+      title: json['title'],
+      image: json['image'],
+      description: json['description'],
+    );
+  }
+}
+
 class AboutPage extends StatelessWidget {
-  const AboutPage({super.key});
+  AboutPage({super.key});
+
+  var mangkok = DataWalet(
+      title: 'Mangkok', image: 'assets/images/mangkok.png', description: '');
+  var oval = DataWalet(
+      title: 'Oval', image: 'assets/images/oval.png', description: '');
+  var sudut = DataWalet(
+      title: 'Sudut', image: 'assets/images/sudut.png', description: '');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Page'),
+        backgroundColor: Colors.teal[900],
+        foregroundColor: Colors.white,
+        // title: const Text('About Page'),
       ),
       body: Container(
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.teal[50],
+          color: Colors.teal[900],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: const Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // const Text(
             //   'You have pushed the button this many times:',
             // ),
-            const CardExample(),
-            const CardExample(),
-            const CardExample(),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate back to first route when tapped.
-              },
-              child: const Text('Go back!'),
+            SizedBox(
+                width: 150,
+                child: Image(
+                  image: AssetImage('assets/images/drawkit-lamp.png'),
+                )),
+            SizedBox(
+              height: 20,
             ),
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Sarang Burung Walet',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CardExample(dataWalet: ''),
+            CardExample(dataWalet: ''),
+            CardExample(dataWalet: ''),
           ],
         ),
       ),
@@ -36,7 +85,9 @@ class AboutPage extends StatelessWidget {
 }
 
 class CardExample extends StatelessWidget {
-  const CardExample({super.key});
+  const CardExample({super.key, required this.dataWalet});
+
+  final dataWalet;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +101,31 @@ class CardExample extends StatelessWidget {
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            debugPrint('Card tapped.');
+            //open dialog
+
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Dialog Title'),
+                    content: Text('This is the content of the dialog'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Close'),
+                      ),
+                    ],
+                  );
+                });
           },
           child: const SizedBox(
-            width: 300,
-            height: 100,
-            child: Text('A card that can be tapped'),
-          ),
+              width: double.infinity,
+              child: Image(
+                height: 150,
+                image: AssetImage('assets/images/mangkok.png'),
+              )),
         ),
       ),
     );
