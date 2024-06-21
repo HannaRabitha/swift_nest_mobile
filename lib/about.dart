@@ -1,36 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
-class DataWalet {
-  final String title;
-  final String image;
-  final String description;
-
-  DataWalet({
-    required this.title,
-    required this.image,
-    required this.description,
-  });
-
-  factory DataWalet.fromJson(Map<String, dynamic> json) {
-    return DataWalet(
-      title: json['title'],
-      image: json['image'],
-      description: json['description'],
-    );
-  }
-}
+import 'package:swift_nest/data_walet.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage({super.key});
 
-  var mangkok = DataWalet(
-      title: 'Mangkok', image: 'assets/images/mangkok.png', description: '');
-  var oval = DataWalet(
-      title: 'Oval', image: 'assets/images/oval.png', description: '');
-  var sudut = DataWalet(
-      title: 'Sudut', image: 'assets/images/sudut.png', description: '');
+  // var mangkok = DataWalet(
+  //     title: 'Mangkok', image: 'assets/images/mangkok.png', description: '');
+  // var oval = DataWalet(
+  //     title: 'Oval', image: 'assets/images/oval.png', description: '');
+  // var sudut = DataWalet(
+  //     title: 'Sudut', image: 'assets/images/sudut.png', description: '');
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +26,21 @@ class AboutPage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.teal[900],
         ),
-        child: const Column(
+        child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // const Text(
             //   'You have pushed the button this many times:',
             // ),
-            SizedBox(
+            const SizedBox(
                 width: 150,
                 child: Image(
                   image: AssetImage('assets/images/drawkit-lamp.png'),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               child: Text(
                 'Sarang Burung Walet',
@@ -71,61 +52,57 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            CardExample(dataWalet: ''),
-            CardExample(dataWalet: ''),
-            CardExample(dataWalet: ''),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  elevation: 6,
+                  child: ListTile(
+                    leading: Image(
+                      width: 100,
+                      image: AssetImage(dataWalet[index]['image']),
+                    ),
+                    title: Text(dataWalet[index]['title'],
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 203, 130, 3)),
+                        textAlign: TextAlign.left),
+                    subtitle: Text(dataWalet[index]['description']),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(dataWalet[index]['title'],
+                                  style: const TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 203, 130, 3))),
+                              // content: Text(dataWalet[index]['description']),
+                              content: Image(
+                                image: AssetImage(dataWalet[index]['image']),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Close'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  ),
+                );
+              },
+            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardExample extends StatelessWidget {
-  const CardExample({super.key, required this.dataWalet});
-
-  final dataWalet;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            //open dialog
-
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Dialog Title'),
-                    content: Text('This is the content of the dialog'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('Close'),
-                      ),
-                    ],
-                  );
-                });
-          },
-          child: const SizedBox(
-              width: double.infinity,
-              child: Image(
-                height: 150,
-                image: AssetImage('assets/images/mangkok.png'),
-              )),
         ),
       ),
     );
