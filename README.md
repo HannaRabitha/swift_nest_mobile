@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![Documentation](https://github.com/HannaRabitha/swift_nest_mobile/blob/main/assets/png/ss.png)
+![Documentation](https://github.com/HannaRabitha/swift_nest_mobile/blob/main/assets/png/swift-nest.png)
 
 
 ## Getting Started
