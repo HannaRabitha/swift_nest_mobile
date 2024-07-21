@@ -5,10 +5,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:swift_nest/option_camera.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage(
-      {super.key, required this.imageFile, required this.prediction});
-  final File imageFile;
+  final String imagePath;
   final String prediction;
+  const ResultPage(
+      {super.key, required this.imagePath, required this.prediction});
+  
 
   @override
   State<ResultPage> createState() => _ResultPage();
@@ -64,7 +65,7 @@ class _ResultPage extends State<ResultPage> {
                     top: 0,
                     bottom: 50,
                     child: Image.file(
-                      widget.imageFile,
+                      File(widget.imagePath),
                       width: 200,
                       height: 200,
                       fit: BoxFit.cover,
